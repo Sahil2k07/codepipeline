@@ -1,5 +1,3 @@
-version: 0.2
-
 phases:
   install:
     commands:
@@ -12,16 +10,12 @@ phases:
       - echo "Installing bun..."
       - curl -fsSL https://bun.sh/install | bash
       - export PATH="$HOME/.bun/bin:$PATH"
-
   pre_build:
     commands:
       - echo "Preparing build..."
-
+      - export PATH=/usr/local/go/bin:$HOME/.bun/bin:$PATH # ensure correct Go + bun in PATH
   build:
     commands:
       - echo "Running Makefile..."
+      - export PATH=/usr/local/go/bin:$HOME/.bun/bin:$PATH # safety
       - make all
-
-artifacts:
-  files:
-    - app.zip
