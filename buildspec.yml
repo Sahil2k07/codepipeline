@@ -29,5 +29,6 @@ phases:
       - unzip -l app.zip
 
 artifacts:
+  base-directory: build
   files:
-    - app.zip
+    - "**/*"
