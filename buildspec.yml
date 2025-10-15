@@ -1,3 +1,5 @@
+version: 0.2
+
 phases:
   install:
     commands:
@@ -7,15 +9,25 @@ phases:
       - sudo tar -C /usr/local -xzf go1.25.3.linux-amd64.tar.gz
       - export PATH=/usr/local/go/bin:$PATH
       - go version # should now show 1.25.3
-      - echo "Installing bun..."
+      - echo "Installing Bun..."
       - curl -fsSL https://bun.sh/install | bash
       - export PATH="$HOME/.bun/bin:$PATH"
+      - bun --version
+
   pre_build:
     commands:
       - echo "Preparing build..."
-      - export PATH=/usr/local/go/bin:$HOME/.bun/bin:$PATH # ensure correct Go + bun in PATH
+      # Ensure Go + Bun are in PATH for the build phase
+      - export PATH=/usr/local/go/bin:$HOME/.bun/bin:$PATH
+
   build:
     commands:
       - echo "Running Makefile..."
-      - export PATH=/usr/local/go/bin:$HOME/.bun/bin:$PATH # safety
+      - export PATH=/usr/local/go/bin:$HOME/.bun/bin:$PATH
       - make all
+      - echo "Build complete. Contents of app.zip:"
+      - unzip -l app.zip
+
+artifacts:
+  files:
+    - app.zip
