@@ -1,6 +1,17 @@
 version: 0.2
 
 phases:
+  install:
+    commands:
+      - echo "Installing Go..."
+      - sudo apt update
+      - sudo apt install golang -y
+      - echo "Installing bun..."
+      - curl -fsSL https://bun.sh/install | bash
+      - export PATH="$HOME/.bun/bin:$PATH"
+  pre_build:
+    commands:
+      - echo "Preparing build..."
   build:
     commands:
       - echo "Running Makefile..."
