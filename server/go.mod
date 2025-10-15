@@ -1,6 +1,6 @@
 module github.com/Sahil2k07/React-Go
 
-go 1.23.1
+go 1.23
 
 require (
 	github.com/labstack/echo/v4 v4.13.3
