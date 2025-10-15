@@ -1,0 +1,8 @@
+vendor
+dist
+node_modules
+.env
+app.zip
+build
+.git
+.gitignore
