@@ -3,15 +3,21 @@ version: 0.2
 phases:
   install:
     commands:
-      - echo "Installing Go..."
-      - sudo apt update
-      - sudo apt install golang -y
-      - echo "Installing bun..."
+      - echo "Installing Go 1.23..."
+      - wget https://golang.org/dl/go1.23.linux-amd64.tar.gz
+      - sudo rm -rf /usr/local/go
+      - sudo tar -C /usr/local -xzf go1.23.linux-amd64.tar.gz
+      - export PATH=$PATH:/usr/local/go/bin
+      - go version # log Go version
+      - echo "Installing Bun..."
       - curl -fsSL https://bun.sh/install | bash
       - export PATH="$HOME/.bun/bin:$PATH"
+      - bun --version # log Bun version
+
   pre_build:
     commands:
       - echo "Preparing build..."
+
   build:
     commands:
       - echo "Running Makefile..."
